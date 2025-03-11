@@ -17,6 +17,7 @@
                 font-weight: 700;
                 font-style: normal;
                 font-size: 32px;
+                padding: 10px;
             }
             input {
                 font-family: "Amatic SC", sans-serif;
@@ -53,8 +54,8 @@
         tg.expand();
 
         sBtn.addEventListener("click", () => {
-            let time = document.getElementsByClassName("time").value;
-            let data = document.getElementsByClassName("data").value;
+            let time = document.getElementById("time").value;
+            let data = document.getElementById("data").value;
 
             let senddata = {
                 time: time,
