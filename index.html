@@ -14,8 +14,12 @@
     <input type="text" class="text-inp" placeholder="Текст">
     <button id="sBtn">Отправить</button>
 
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        const tg = window.Telegram.WebApp;
         const sBtn = document.getElementById("sBtn");
+        tg.expand();
+
         sBtn.addEventListener("click", () => {
             let title = document.getElementsByClassName("title-inp")[0].value;
             let description = document.getElementsByClassName("desc-inp")[0].value;
