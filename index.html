@@ -6,32 +6,62 @@
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Настройка уведомлений</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@200..700&family=Pacifico&family=Press+Start+2P&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-color: #222222;
+                color: white;
+                font-family: "Amatic SC", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+            }
+            input {
+                font-family: "Amatic SC", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+                background-color: #454545;
+                color: white;
+                border: 2px solid #656565;
+                border-radius: 5%;
+            }
+            button {
+                font-family: "Amatic SC", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+                background-color: #454545;
+                color: white;
+                border: 3px solid #656565;
+                border-radius: 5%;
+            }
+        </style>
     </head>
 <body>
     <h1>Тест отправки данных</h1>
-    <input type="text" class="title-inp" placeholder="Заголовок">
-    <input type="text" class="desc-inp" placeholder="Описание">
-    <input type="text" class="text-inp" placeholder="Текст">
-    <button id="sBtn">Отправить</button>
+    <input type="time" id="time" required>
+    <input type="date" id="date" required>
+    <button id="sendButton">Отправить</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
-        const sBtn = document.getElementById("sBtn");
+        const sBtn = document.getElementById("sendButton");
         tg.expand();
 
         sBtn.addEventListener("click", () => {
-            let title = document.getElementsByClassName("title-inp")[0].value;
-            let description = document.getElementsByClassName("desc-inp")[0].value;
-            let text = document.getElementsByClassName("text-inp")[0].value;
+            let time = document.getElementsByClassName("time").value;
+            let data = document.getElementsByClassName("data").value;
 
-            let data = {
-                title: title,
-                desc: description,
-                text: text
+            let senddata = {
+                time: time,
+                data: data
             };
 
-            tg.sendData(JSON.stringify(data));
+            tg.sendData(JSON.stringify(senddata));
         });
     </script>
 </body>
