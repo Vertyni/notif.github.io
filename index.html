@@ -50,16 +50,18 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
-        const sBtn = document.getElementById("sendButton");
+        const sendButton = document.getElementById("sendButton");
         tg.expand();
 
-        sBtn.addEventListener("click", () => {
+        sendButton.addEventListener("click", () => {
             let time = document.getElementById("time").value;
-            let data = document.getElementById("data").value;
+            let date = document.getElementById("date").value;
+
+            if (time == null || date == null) return;
 
             let senddata = {
                 time: time,
-                data: data
+                date: date
             };
 
             tg.sendData(JSON.stringify(senddata));
