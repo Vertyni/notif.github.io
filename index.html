@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Настройка уведомлений</title>
+    </head>
+<body>
+    <h1>Тест отправки данных</h1>
+    <input type="text" class="title-inp" placeholder="Заголовок">
+    <input type="text" class="desc-inp" placeholder="Описание">
+    <input type="text" class="text-inp" placeholder="Текст">
+    <button id="sBtn">Отправить</button>
+
+    <script>
+        const sBtn = document.getElementById("sBtn");
+        sBtn.addEventListener("click", () => {
+            let title = document.getElementsByClassName("title-inp")[0].value;
+            let description = document.getElementsByClassName("desc-inp")[0].value;
+            let text = document.getElementsByClassName("text-inp")[0].value;
+
+            let data = {
+                title: title,
+                desc: description,
+                text: text
+            };
+
+            tg.sendData(JSON.stringify(data));
+        });
+    </script>
+</body>
+</html>
