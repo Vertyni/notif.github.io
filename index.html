@@ -72,14 +72,13 @@
 
         const dropdown = document.getElementById("dropdown");
         const urlParams = new URLSearchParams(window.location.search);
-        let notifs = urlParams.get('notifs');
+        let notifs = JSON.parse(urlParams.get('notifs'));
 
         tg.expand();
 
         deleteButton.addEventListener("click", () => {
             notifs = notifs.filter(notifs => notifs !== dropdown.value);
             setDropDown();
-            console.log(dropdown.value);
         });
 
         function setDropDown() {
