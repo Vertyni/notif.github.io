@@ -72,7 +72,7 @@
 
         const dropdown = document.getElementById("dropdown");
         const urlParams = new URLSearchParams(window.location.search);
-        let notifs = JSON.parse('["2025-03-27 02:17", "25-25-25 09 09"]');//urlParams.get('notifs');
+        let notifs = urlParams.get('notifs');
 
         tg.expand();
 
