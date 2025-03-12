@@ -39,33 +39,83 @@
                 border: 3px solid #656565;
                 border-radius: 5%;
             }
+            select, option {
+                font-family: "Amatic SC", sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+                background-color: #454545;
+                color: white;
+                border: 2px solid #656565;
+                border-radius: 5%;
+            }
         </style>
     </head>
 <body>
-    <h1>Тест отправки данных</h1>
+    <h2>Ваши напоминания</h2>
+    <select id="dropdown">
+        <option value="">Выберите напоминание</option>
+    </select>
+    <button id="deleteButton">Удалить</button>
+    <h2>Создать напоминание</h2>
     <input type="time" id="time" required>
     <input type="date" id="date" required>
-    <button id="sendButton">Отправить</button>
+    <button id="addButton">Добавить напоминание</button>
+    <button id="saveButton">Сохранить</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
-        const sendButton = document.getElementById("sendButton");
+        const addButton = document.getElementById("addButton");
+        const saveButton = document.getElementById("saveButton");
+        const deleteButton = document.getElementById("deleteButton");
+
+        const dropdown = document.getElementById("dropdown");
+        const urlParams = new URLSearchParams(window.location.search);
+        let notifs = JSON.parse('["2025-03-27 02:17", "25-25-25 09 09"]');//urlParams.get('notifs');
+
         tg.expand();
 
-        sendButton.addEventListener("click", () => {
-            let time = document.getElementById("time").value;
-            let date = document.getElementById("date").value;
-
-            if (time == null || date == null) return;
-
-            let senddata = {
-                time: time,
-                date: date
-            };
-
-            tg.sendData(JSON.stringify(senddata));
+        deleteButton.addEventListener("click", () => {
+            notifs = notifs.filter(notifs => notifs !== dropdown.value);
+            setDropDown();
+            console.log(dropdown.value);
         });
+
+        function setDropDown() {
+            if (notifs != []) {
+
+                Array.from(dropdown.options).forEach(option => {
+                    if (!option.id) {
+                        dropdown.remove(option.index);
+                    }
+                });
+
+                const newOption = document.createElement('option');
+                newOption.value = "Выберите напоминание";
+                newOption.textContent = "Выберите напоминание";
+                document.getElementById('dropdown').appendChild(newOption);
+
+                notifs.forEach(element => {
+                    const newOption = document.createElement('option');
+                    newOption.value = element;
+                    newOption.textContent = element;
+                    document.getElementById('dropdown').appendChild(newOption);
+                });
+            }
+        }
+
+        addButton.addEventListener("click", () => {
+            if (document.getElementById("date").value != "" && document.getElementById("time").value != "") {
+                notifs.push(document.getElementById("date").value + " " + document.getElementById("time").value);
+            }
+        });
+
+        saveButton.addEventListener("click", () => {
+            tg.sendData(JSON.stringify(notifs));
+        });
+
+        setDropDown();
     </script>
 </body>
 </html>
